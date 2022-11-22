@@ -1,9 +1,9 @@
-import React, { useEffect, FC } from "react";
+import { useEffect, FC, ReactElement } from "react";
 import { redirect } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
 import { fetchNotes } from "../features/note/noteSlice";
 
-const Home: FC = () => {
+const Home: FC = (): ReactElement => {
   const note = useAppSelector((state) => state.note);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -35,7 +35,7 @@ const Home: FC = () => {
       <form onSubmit={handleLogout}>
         <button type="submit">Logout</button>
         <div>
-          <h2>List of Users</h2>
+          <h2>Your notes</h2>
           {note.loading && <div>Loading...</div>}
           {!note.loading && note.error ? <div>Error: {note.error}</div> : null}
           {!note.loading && note.notes.length ? (

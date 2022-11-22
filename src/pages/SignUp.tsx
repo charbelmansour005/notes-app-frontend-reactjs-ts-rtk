@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, ReactElement } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,6 +15,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SignUpURL } from "../helper/app-helper";
+import { darkTheme, lightTheme } from "../assets/theme";
+import IconButton from "@mui/material/IconButton";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import NightlightIcon from "@mui/icons-material/Nightlight";
+import {  toast } from "react-toastify";
 
 function Copyright(props: any) {
   return (
@@ -35,10 +40,22 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-const SignUp: FC = () => {
+const SignUp: FC = (): ReactElement => {
   const [Email, setEmail] = useState<string | null>(null);
   const [Password, setPassword] = useState<string | null>(null);
+  const [theme, setTheme] = useState<any>(lightTheme);
   const navigate = useNavigate();
+  const notify = () =>
+    toast("Alright!👏  Login to start!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
   type CreateResponse = {
     Success: string;
@@ -52,6 +69,7 @@ const SignUp: FC = () => {
     };
     try {
       await axios.put<CreateResponse>(SignUpURL, payload);
+      notify();
       navigate(`/login`);
     } catch (error) {
       console.log(error);
@@ -69,7 +87,22 @@ const SignUp: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
+        <IconButton
+          onClick={() => {
+            setTheme(lightTheme);
+          }}
+        >
+          <WbSunnyIcon />
+        </IconButton>
+        <IconButton
+          onClick={() => {
+            setTheme(darkTheme);
+          }}
+        >
+          <NightlightIcon />
+        </IconButton>
         <CssBaseline />
+
         <Box
           sx={{
             marginTop: 8,

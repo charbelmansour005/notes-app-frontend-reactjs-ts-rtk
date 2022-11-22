@@ -1,37 +1,24 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { baseURL } from "../../helper/app-helper";
+import { Note } from "../../types/note.type";
+import { InitialNoteState } from "../../types/note.type";
 
-type Note = {
-  _id: string;
-  content: string;
-  creator: string;
-  updated_At: string;
-  categoryName: string;
-  __v: number;
-};
-type InitialState = {
-  loading: boolean;
-  notes: Note[];
-  error: string;
-};
-const initialState: InitialState = {
+const initialNoteState: InitialNoteState = {
   loading: false,
   notes: [],
   error: "",
 };
 
-// Generates pending, fulfilled and rejected action types
-export const fetchNotes = createAsyncThunk("note/fetchNotes", () => {
+export const fetchNotes = createAsyncThunk("note/fetchNotes", async () => {
   let userId = localStorage.getItem("userId");
-  return axios
-    .get(baseURL + `reactnotes/${userId}`)
-    .then((response) => response.data.usernotes);
+  const response = await axios.get(baseURL + `reactnotes/${userId}`);
+  return response.data.usernotes;
 });
 
 const noteSlice = createSlice({
   name: "note",
-  initialState,
+  initialState: initialNoteState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchNotes.pending, (state) => {

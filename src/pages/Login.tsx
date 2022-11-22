@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, ReactElement } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +13,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { LoginURL } from "../helper/app-helper";
 import { useNavigate, Link as NavLink } from "react-router-dom";
+import { darkTheme, lightTheme } from "../assets/theme";
+import IconButton from "@mui/material/IconButton";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import NightlightIcon from "@mui/icons-material/Nightlight";
+import { toast } from "react-toastify";
 
 const Copyright = (props: any) => {
   return (
@@ -25,19 +30,30 @@ const Copyright = (props: any) => {
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Finished Website
-      </Link>{" "}
+      </Link>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 };
 
-const theme = createTheme();
+// const theme = createTheme();
 
-const Login: FC = () => {
+const Login: FC = (): ReactElement => {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
+  const [theme, setTheme] = useState<any>(lightTheme);
   const navigate = useNavigate();
+  const notify = () =>
+    toast.success("Let's start taking notes! ☁️", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
   type CreateLoginResponse = {
     token: string;
@@ -56,6 +72,7 @@ const Login: FC = () => {
       let userId: string = response.data.userId;
       localStorage.setItem("Token", token);
       localStorage.setItem("userId", userId);
+      notify();
       navigate(`/`);
     } catch (error) {
       console.log(error);
@@ -90,7 +107,22 @@ const Login: FC = () => {
             backgroundPosition: "center",
           }}
         />
+
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <IconButton
+            onClick={() => {
+              setTheme(lightTheme);
+            }}
+          >
+            <WbSunnyIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              setTheme(darkTheme);
+            }}
+          >
+            <NightlightIcon />
+          </IconButton>
           <Box
             sx={{
               my: 8,
@@ -142,6 +174,7 @@ const Login: FC = () => {
               >
                 Sign In
               </Button>
+
               <Grid container>
                 <Grid item>
                   <Link variant="body2">
