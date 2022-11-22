@@ -23,7 +23,6 @@ const Login: FC = () => {
       const response = await axios.post<CreateLoginResponse>(LoginURL, payload);
       let token: string = response.data.token;
       let userId: string = response.data.userId;
-      console.log(token, "userid: " + userId);
       localStorage.setItem("Token", token);
       localStorage.setItem("userId", userId);
       navigate(`/`);
@@ -35,6 +34,7 @@ const Login: FC = () => {
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
+
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
