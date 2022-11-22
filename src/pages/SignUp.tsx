@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SignUpURL } from "../helper/app-helper";
-import { darkTheme, lightTheme } from "../assets/theme";
+import { darkTheme, lightTheme } from "../assets/theme/theme";
 import IconButton from "@mui/material/IconButton";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";

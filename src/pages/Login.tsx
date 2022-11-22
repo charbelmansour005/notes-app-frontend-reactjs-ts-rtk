@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import { LoginURL } from "../helper/app-helper";
 import { useNavigate, Link as NavLink } from "react-router-dom";
-import { darkTheme, lightTheme } from "../assets/theme";
+import { darkTheme, lightTheme } from "../assets/theme/theme";
 import IconButton from "@mui/material/IconButton";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
