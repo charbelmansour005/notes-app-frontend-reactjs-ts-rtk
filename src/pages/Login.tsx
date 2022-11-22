@@ -1,4 +1,5 @@
 import React, { useState, FC, ReactElement } from "react";
+import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,8 +10,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
+import { ThemeProvider } from "@mui/material/styles";
 import { LoginURL } from "../helper/app-helper";
 import { useNavigate, Link as NavLink } from "react-router-dom";
 import { darkTheme, lightTheme } from "../assets/theme";
@@ -18,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Copyright = (props: any) => {
   return (
@@ -36,15 +37,25 @@ const Copyright = (props: any) => {
   );
 };
 
-// const theme = createTheme();
-
 const Login: FC = (): ReactElement => {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
   const navigate = useNavigate();
   const notify = () =>
-    toast.success("Let's start taking notes! ☁️", {
+    toast.success("Logged in", {
+      position: "bottom-left",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  const notifyError = () =>
+    toast.error("Something went wrong", {
       position: "bottom-left",
       autoClose: 5000,
       hideProgressBar: false,
@@ -67,16 +78,20 @@ const Login: FC = (): ReactElement => {
       password: password,
     };
     try {
+      setIsLoading(true);
       const response = await axios.post<CreateLoginResponse>(LoginURL, payload);
       let token: string = response.data.token;
       let userId: string = response.data.userId;
       localStorage.setItem("Token", token);
       localStorage.setItem("userId", userId);
       notify();
-      navigate(`/`);
+      return navigate(`/`);
     } catch (error) {
+      setIsLoading(false);
+      notifyError();
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -174,7 +189,7 @@ const Login: FC = (): ReactElement => {
               >
                 Sign In
               </Button>
-
+              {isLoading && <LinearProgress />}
               <Grid container>
                 <Grid item>
                   <Link variant="body2">

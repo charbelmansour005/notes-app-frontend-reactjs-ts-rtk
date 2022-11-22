@@ -19,7 +19,8 @@ import { darkTheme, lightTheme } from "../assets/theme";
 import IconButton from "@mui/material/IconButton";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function Copyright(props: any) {
   return (
@@ -38,16 +39,26 @@ function Copyright(props: any) {
   );
 }
 
-const theme = createTheme();
-
 const SignUp: FC = (): ReactElement => {
   const [Email, setEmail] = useState<string | null>(null);
   const [Password, setPassword] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
   const navigate = useNavigate();
   const notify = () =>
     toast("Alright!👏  Login to start!", {
       position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  const notifyError = () =>
+    toast.error("Something went wrong...", {
+      position: "bottom-left",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -68,12 +79,16 @@ const SignUp: FC = (): ReactElement => {
       password: Password,
     };
     try {
+      setIsLoading(true);
       await axios.put<CreateResponse>(SignUpURL, payload);
       notify();
       navigate(`/login`);
     } catch (error) {
+      setIsLoading(false);
+      notifyError();
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -164,6 +179,7 @@ const SignUp: FC = (): ReactElement => {
             >
               Sign Up
             </Button>
+            {isLoading && <LinearProgress />}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link variant="body2">
