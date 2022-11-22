@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from "react";
+import { FC, Fragment } from "react";
 import "./App.css";
 import { RoutesAsObj } from "./routes/RoutesAsObj";
 
