@@ -1,8 +1,16 @@
 .center {
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
+
+/* .center {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+} */
 
 .center_btn {
   display: flex;

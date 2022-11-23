@@ -107,11 +107,6 @@ const Home: FC = (): ReactElement => {
               <NotesList />
             </div>
           ) : null}
-          {/* {!note.notes.length && (
-            <div className="center">
-              <h1>Start Creating</h1>
-            </div>
-          )} */}
         </div>
       </div>
     </Fragment>
