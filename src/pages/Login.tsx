@@ -45,7 +45,31 @@ const Login: FC = (): ReactElement => {
 
   const navigate = useNavigate();
 
-  const notify = () =>
+  const notify404 = () =>
+    toast.error("Email not registered", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  const notify401 = () =>
+    toast.error("Wrong Email or Password", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  const notifySuccess = () =>
     toast.success("Logged in", {
       position: "bottom-left",
       autoClose: 1000,
@@ -75,7 +99,7 @@ const Login: FC = (): ReactElement => {
       let userId: string = response.data.userId;
       localStorage.setItem("Token", token);
       localStorage.setItem("userId", userId);
-      notify();
+      notifySuccess();
       return navigate(`/`);
     } catch (error) {
       if (error instanceof Error) {
@@ -83,27 +107,9 @@ const Login: FC = (): ReactElement => {
         setEmail("");
         setPassword("");
         if (error.message === "Request failed with status code 404") {
-          return toast.error("Email not registered", {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+          return notify404();
         } else if (error.message === "Request failed with status code 401") {
-          return toast.error("Wrong Email or Password", {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+          return notify401();
         }
       }
     }

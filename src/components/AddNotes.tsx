@@ -26,7 +26,7 @@ const AddNotes: FC = (): ReactElement => {
     };
     try {
       axios.post<CreateNote>(baseURL + `reactnote/${creator}`, payload);
-      
+
       window.location.reload();
     } catch (error) {
       console.log(error);
