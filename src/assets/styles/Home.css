@@ -3,3 +3,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.center_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 5px;
+}

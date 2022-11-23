@@ -1,17 +1,17 @@
-import { useEffect, FC, ReactElement, useState } from "react";
+import { useEffect, FC, ReactElement, useState, Fragment } from "react";
 import { redirect } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
 import { fetchNotes } from "../features/note/noteSlice";
 import AddNotes from "../components/AddNotes";
 import Backdrop from "@mui/material/Backdrop";
-import Button from "@mui/material/Button";
-import { darkTheme, lightTheme } from "../assets/theme/theme";
-import { ThemeProvider } from "@mui/material/styles";
+import Skeleton from "@mui/material/Skeleton";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 import NavBar from "../components/NavBar";
 import NotesList from "../components/NotesList";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import "../assets/styles/Home.css";
+import Tooltip from "@mui/material/Tooltip";
 
 const Home: FC = (): ReactElement => {
   const note = useAppSelector((state) => state.note);
@@ -44,33 +44,60 @@ const Home: FC = (): ReactElement => {
     checkToken();
   }, []);
 
+  const n = note.notes.length;
+
   return (
-    <ThemeProvider theme={darkTheme}>
+    <Fragment>
       <NavBar />
+
       <div>
-        SecureHome
-        <Button onClick={handleToggle}>Show backdrop</Button>
+        <div className="center_btn">
+          <Tooltip title="Add" arrow>
+            <IconButton onClick={handleToggle}>
+              <AddCircleIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
         <Backdrop
           sx={{ color: "#ffff", zIndex: (theme) => theme.zIndex.drawer + 3 }}
           open={open}
         >
           <IconButton onClick={handleClose}>
-            <CloseIcon />
+            <CloseIcon sx={{ color: "white" }} />
           </IconButton>
           <AddNotes />
         </Backdrop>
         <div>
-          <h2>Your notes</h2>
-          {note.loading && <div>Loading...</div>}
-          {!note.loading && note.error ? <div>Error: {note.error}</div> : null}
+          <div className="center">
+            {note.loading && (
+              <Fragment>
+                {[...Array(n)].map(() => (
+                  <Skeleton
+                    className="margin__top"
+                    variant="rounded"
+                    width={450}
+                    height={150}
+                  />
+                ))}
+              </Fragment>
+            )}
+          </div>
+          {!note.loading && note.error ? (
+            <div className="center">Error: {note.error}</div>
+          ) : null}
           {!note.loading && note.notes.length ? (
             <div className="center">
               <NotesList />
             </div>
           ) : null}
+          {!note.notes.length && (
+            <div className="center">
+              <h1>Start Creating</h1>
+            </div>
+          )}
         </div>
       </div>
-    </ThemeProvider>
+    </Fragment>
   );
 };
 

@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { Link as NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SignUpURL } from "../helper/app-helper";
@@ -21,6 +21,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
+import "../assets/styles/SignUp.css";
 
 function Copyright(props: any) {
   return (
@@ -41,24 +42,14 @@ function Copyright(props: any) {
 
 const SignUp: FC = (): ReactElement => {
   const [Email, setEmail] = useState<string | null>(null);
-  const [Password, setPassword] = useState<string | null>(null);
+  const [Password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
+  const [inputError, setInputError] = useState<boolean>(false);
   const navigate = useNavigate();
   const notify = () =>
-    toast("Alright!👏  Login to start!", {
+    toast.success("Sign in to get started", {
       position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  const notifyError = () =>
-    toast.error("Something went wrong...", {
-      position: "bottom-left",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -78,15 +69,32 @@ const SignUp: FC = (): ReactElement => {
       email: Email,
       password: Password,
     };
+
     try {
+      //input error
+      if (!Email?.includes("@") || Password?.length < 13) {
+        return setInputError(true);
+      }
       setIsLoading(true);
       await axios.put<CreateResponse>(SignUpURL, payload);
       notify();
       navigate(`/login`);
     } catch (error) {
-      setIsLoading(false);
-      notifyError();
-      console.log(error);
+      if (error instanceof Error) {
+        setIsLoading(false);
+        setEmail("");
+        setPassword("");
+        return toast.error(error.message, {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     }
     setIsLoading(false);
   };
@@ -141,25 +149,43 @@ const SignUp: FC = (): ReactElement => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  color={inputError ? "warning" : "primary"}
+                  variant="standard"
                   required
+                  focused
                   fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
                   onChange={handleEmailChange}
+                  value={Email}
+                  helperText={
+                    inputError
+                      ? "Email must be real & Password at least 13 characters"
+                      : null
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  color={inputError ? "warning" : "primary"}
+                  variant="standard"
                   required
                   fullWidth
                   name="password"
+                  focused
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
                   onChange={handlePasswordChange}
+                  value={Password}
+                  helperText={
+                    inputError
+                      ? "Email must be real & Password at least 13 characters"
+                      : null
+                  }
                 />
               </Grid>
               <Grid item xs={12}>

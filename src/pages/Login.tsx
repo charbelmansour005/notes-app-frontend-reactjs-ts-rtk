@@ -87,9 +87,34 @@ const Login: FC = (): ReactElement => {
       notify();
       return navigate(`/`);
     } catch (error) {
-      setIsLoading(false);
-      notifyError();
-      console.log(error);
+      if (error instanceof Error) {
+        setIsLoading(false);
+        setEmail("");
+        setPassword("");
+        if (error.message === "Request failed with status code 404") {
+          return toast.error("Email not registered", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else if (error.message === "Request failed with status code 401") {
+          return toast.error("Wrong Email or Password", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      }
     }
     setIsLoading(false);
   };
@@ -169,6 +194,7 @@ const Login: FC = (): ReactElement => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
               />
               <TextField
                 onChange={handlePasswordChange}
@@ -180,6 +206,7 @@ const Login: FC = (): ReactElement => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
               />
               <Button
                 type="submit"
