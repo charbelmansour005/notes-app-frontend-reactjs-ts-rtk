@@ -42,23 +42,14 @@ const Login: FC = (): ReactElement => {
   const [password, setPassword] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
+
   const navigate = useNavigate();
+
   const notify = () =>
     toast.success("Logged in", {
       position: "bottom-left",
       autoClose: 1000,
       hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  const notifyError = () =>
-    toast.error("Something went wrong", {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,

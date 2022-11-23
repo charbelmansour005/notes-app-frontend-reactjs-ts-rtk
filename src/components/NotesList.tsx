@@ -23,7 +23,7 @@ export default function NotesList() {
             marginBottom: "10px",
           }}
         >
-          <Card>
+          <Card variant="outlined">
             <CardContent>
               <Typography
                 sx={{ fontSize: 14 }}
@@ -38,7 +38,7 @@ export default function NotesList() {
               </Typography>
               <Typography variant="body2" color="text.secondary" gutterBottom>
                 <br />
-                Last Updated at {note.updated_At.split("T")[0]}
+                Last updated at {note.updated_At.split("T")[0]}
               </Typography>
             </CardContent>
             <CardActions>
