@@ -12,6 +12,9 @@ import NotesList from "../components/NotesList";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import "../assets/styles/Home.css";
 import Tooltip from "@mui/material/Tooltip";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const Home: FC = (): ReactElement => {
   const note = useAppSelector((state) => state.note);
@@ -44,17 +47,25 @@ const Home: FC = (): ReactElement => {
     checkToken();
   }, []);
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   const n = note.notes.length;
 
   return (
     <Fragment>
       <NavBar />
-
       <div>
         <div className="center_btn">
           <Tooltip title="Add" arrow>
             <IconButton onClick={handleToggle}>
               <AddCircleIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Refresh" arrow>
+            <IconButton onClick={handleRefresh}>
+              <RefreshIcon />
             </IconButton>
           </Tooltip>
         </div>
@@ -65,6 +76,7 @@ const Home: FC = (): ReactElement => {
           <IconButton onClick={handleClose}>
             <CloseIcon sx={{ color: "white" }} />
           </IconButton>
+
           <AddNotes />
         </Backdrop>
         <div>
@@ -82,19 +94,24 @@ const Home: FC = (): ReactElement => {
               </Fragment>
             )}
           </div>
-          {!note.loading && note.error ? (
-            <div className="center">Error: {note.error}</div>
+          {note.error ? (
+            <div className="center">
+              <Alert severity="info">
+                <AlertTitle>Info</AlertTitle>
+                No Notes Found — <strong>start taking some!</strong>
+              </Alert>
+            </div>
           ) : null}
           {!note.loading && note.notes.length ? (
             <div className="center">
               <NotesList />
             </div>
           ) : null}
-          {!note.notes.length && (
+          {/* {!note.notes.length && (
             <div className="center">
               <h1>Start Creating</h1>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </Fragment>
