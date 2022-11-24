@@ -21,7 +21,6 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
-import "../assets/styles/SignUp.css";
 
 function Copyright(props: any) {
   return (

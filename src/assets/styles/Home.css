@@ -6,12 +6,6 @@
   justify-content: center;
 }
 
-/* .center {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-} */
-
 .center_btn {
   display: flex;
   align-items: center;
