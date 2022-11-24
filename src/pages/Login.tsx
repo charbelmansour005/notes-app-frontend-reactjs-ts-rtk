@@ -30,7 +30,7 @@ const Copyright = (props: any) => {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Finished Website
+        MERN
       </Link>
       {new Date().getFullYear()}
     </Typography>
@@ -68,8 +68,8 @@ const Login: FC = (): ReactElement => {
     } catch (error) {
       if (error instanceof Error) {
         setIsLoading(false);
-        setEmail("");
-        setPassword("");
+        setEmail(``);
+        setPassword(``);
         if (error.message === "Request failed with status code 404") {
           return notify404();
         } else if (error.message === "Request failed with status code 401") {
