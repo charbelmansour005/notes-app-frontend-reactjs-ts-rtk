@@ -191,7 +191,7 @@ const NavBar = () => {
           </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
@@ -199,7 +199,7 @@ const NavBar = () => {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               edge="end"
@@ -211,16 +211,19 @@ const NavBar = () => {
             >
               <AccountCircle />
             </IconButton>
-            <MenuItem>
-              <Button
-                style={{ color: "white" }}
-                onClick={() => {
-                  navigate("/search");
-                }}
-              >
-                Search
-              </Button>
-            </MenuItem>
+            <IconButton
+              size="large"
+              aria-label="search user notes"
+              edge="end"
+              aria-haspopup="false"
+              color="inherit"
+              style={{ color: "white" }}
+              onClick={() => {
+                navigate("/search");
+              }}
+            >
+              <SearchIcon />
+            </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

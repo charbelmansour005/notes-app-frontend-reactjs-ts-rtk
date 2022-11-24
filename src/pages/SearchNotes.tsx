@@ -8,12 +8,9 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
-import { Chip, IconButton } from "@mui/material";
+import { Chip } from "@mui/material";
 import "../assets/styles/SearchNotes.css";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import Alert from "@mui/material/Alert";
 import SearchIcon from "@mui/icons-material/Search";
 
 const SearchNotes: React.FC = () => {
@@ -33,16 +30,6 @@ const SearchNotes: React.FC = () => {
   useEffect(() => {
     checkToken();
   }, []);
-
-  //   const finalSearchRes = searchResults?.map(
-  //     (item: { content: string; categoryName: string; _id: string }) => {
-  //       return (
-  //         <h1 key={item._id}>
-  //           {item.content}, {item.categoryName}
-  //         </h1>
-  //       );
-  //     }
-  //   );
 
   const finalSearchRes = searchResults?.map(
     (item: {
@@ -81,16 +68,6 @@ const SearchNotes: React.FC = () => {
     }
   );
 
-  //   const finalSearchRes = searchResults?.map(
-  //     (item: { content: string; categoryName: string; _id: string }) => {
-  //       return (
-  //         <h1 key={item._id}>
-  //           {item.content}, {item.categoryName}
-  //         </h1>
-  //       );
-  //     }
-  //   );
-
   return (
     <div>
       <NavBar />
@@ -117,22 +94,25 @@ const SearchNotes: React.FC = () => {
           }}
         />
       </Box>
-      {/* <TextField
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: "10px",
-        }}
-        onChange={(e) => {
-          let result = note.notes.filter((t) =>
-            t.content.includes(e.target.value)
-          );
-          setSearchResults(result);
-          console.log(searchResults);
-        }}
-      /> */}
-      <>{!finalSearchRes.length ? <h1>no search</h1> : finalSearchRes}</>
+      <>
+        {!finalSearchRes.length ? (
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "1rem",
+              marginBottom: "1rem",
+            }}
+          >
+            <Alert severity="info">
+              <strong>search results will be displayed here</strong>
+            </Alert>
+          </Box>
+        ) : (
+          finalSearchRes
+        )}
+      </>
     </div>
   );
 };

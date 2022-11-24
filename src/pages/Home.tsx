@@ -80,7 +80,9 @@ const Home: FC = (): ReactElement => {
         <div>
           <div className="center">
             {note.loading && (
-              <Box sx={{ width: "100%" }}>
+              <Box
+                sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}
+              >
                 <LinearProgress />
               </Box>
             )}
