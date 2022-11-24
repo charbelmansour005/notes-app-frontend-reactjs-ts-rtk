@@ -71,7 +71,7 @@ const Home: FC = (): ReactElement => {
       <NavBar />
       <div>
         <div className="center">
-          
+          {/** Auto Detect Loading RTK */}
           {note.loading && (
             <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
               <LinearProgress />
