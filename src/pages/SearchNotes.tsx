@@ -83,7 +83,7 @@ const SearchNotes: React.FC = () => {
         <SearchIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
         <TextField
           id="input-with-sx"
-          label="Search"
+          // label="Search"
           variant="standard"
           onChange={(e) => {
             let result = note.notes.filter((t) =>

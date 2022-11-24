@@ -17,6 +17,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,6 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
+  const note = useAppSelector((state) => state.note);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -163,7 +165,7 @@ const NavBar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -171,35 +173,26 @@ const NavBar = () => {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            MERN Notes
+            MERN
           </Typography>
-          {/* <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search> */}
+          <Typography
+            noWrap
+            component="div"
+            sx={{ display: { xs: "none", sm: "block", marginLeft: "1rem" } }}
+          >
+            {note.notes.length
+              ? `${note.notes.length} note(s)`
+              : `Start writing notes!`}
+          </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {/* <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
             <IconButton
               size="large"
               edge="end"

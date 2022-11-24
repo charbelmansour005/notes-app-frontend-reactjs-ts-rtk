@@ -18,6 +18,19 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import LinearProgress from "@mui/material/LinearProgress";
 
 const Home: FC = (): ReactElement => {
+  // clearing the localStorage from the Token after 1 hour
+  var hours: number = 1;
+  var now: any = new Date().getTime();
+  var setupTime: any = localStorage.getItem("setupTime");
+  if (setupTime == null) {
+    localStorage.setItem("setupTime", now);
+  } else {
+    if (now - setupTime > hours * 60 * 60 * 1000) {
+      localStorage.clear();
+      localStorage.setItem("setupTime", now);
+    }
+  }
+
   const note = useAppSelector((state) => state.note);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -29,11 +42,12 @@ const Home: FC = (): ReactElement => {
   };
   const dispatch = useAppDispatch();
 
-  //done once
+  // done once
   useEffect(() => {
     dispatch(fetchNotes());
   }, [dispatch]);
 
+  // function for checking the local storage for the token on page load / reload
   const checkToken = () => {
     let token = localStorage.getItem("Token");
     console.log("token in storage" + token);
@@ -56,6 +70,13 @@ const Home: FC = (): ReactElement => {
     <Fragment>
       <NavBar />
       <div>
+        <div className="center">
+          {note.loading && (
+            <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
+              <LinearProgress />
+            </Box>
+          )}
+        </div>
         <div className="center_btn">
           <Tooltip title="Add" arrow>
             <IconButton onClick={handleToggle}>
@@ -78,15 +99,6 @@ const Home: FC = (): ReactElement => {
           <AddNotes />
         </Backdrop>
         <div>
-          <div className="center">
-            {note.loading && (
-              <Box
-                sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}
-              >
-                <LinearProgress />
-              </Box>
-            )}
-          </div>
           {note.error ? (
             <div className="center">
               <Alert severity="info">

@@ -80,7 +80,7 @@ export default function NotesList() {
                     gutterBottom
                   >
                     <br />
-                    Last updated at {note.updated_At.split("T")[0]}
+                    Last Edited at {note.updated_At.split("T")[0]}
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -143,8 +143,8 @@ export default function NotesList() {
                             payload
                           );
                           console.log(response);
-                          window.location.reload();
                           notifySuccess();
+                          window.location.reload();
                         } catch (error) {
                           console.log(error);
                         }
