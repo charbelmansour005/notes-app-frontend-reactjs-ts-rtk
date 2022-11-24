@@ -85,14 +85,6 @@ const Login: FC = (): ReactElement => {
     token: string;
     userId: string;
   };
-  //trying
-  // const storeToken = async (value: string) => {
-  //   try {
-  //     await localStorage.setItem("Token", value);
-  //   } catch (error) {
-  //     console.log("problem setting token", error);
-  //   }
-  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,7 +98,6 @@ const Login: FC = (): ReactElement => {
       let token: string = response.data.token;
       let userId: string = response.data.userId;
       localStorage.setItem("Token", token);
-      // storeToken(token);
       localStorage.setItem("userId", userId);
       notifySuccess();
       return navigate(`/`);
