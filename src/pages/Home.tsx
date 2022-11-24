@@ -71,7 +71,6 @@ const Home: FC = (): ReactElement => {
       <NavBar />
       <div>
         <div className="center">
-          {/** Auto Detect Loading RTK */}
           {note.loading && (
             <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
               <LinearProgress />
@@ -81,7 +80,6 @@ const Home: FC = (): ReactElement => {
         <div className="center_btn">
           <Tooltip title="Add" arrow>
             <IconButton onClick={handleToggle}>
-              {/** Toggles Modal Open ( Hence AddNote Component ) */}
               <AddCircleIcon />
             </IconButton>
           </Tooltip>
@@ -92,16 +90,13 @@ const Home: FC = (): ReactElement => {
             </IconButton>
           </Tooltip>
         </div>
-        {/** MUI Backdrop Modal For Add Notes */}
         <Backdrop
           sx={{ color: "#ffff", zIndex: (theme) => theme.zIndex.drawer + 3 }}
           open={open}
         >
           <IconButton onClick={handleClose}>
-            {/** Close Modal For Add Notes */}
             <CloseIcon sx={{ color: "white" }} />
           </IconButton>
-          {/** Add Notes */}
           <AddNotes />
         </Backdrop>
         <div>
@@ -109,14 +104,12 @@ const Home: FC = (): ReactElement => {
             <div className="center">
               <Alert severity="info">
                 <AlertTitle>Info</AlertTitle>
-                {/** Auto Error Handling */}
                 No Notes Found — <strong>{note.error}</strong>
               </Alert>
             </div>
           ) : null}
           {!note.loading && note.notes.length ? (
             <div className="center">
-              {/** If Done Loading & Length === true */}
               <NotesList />
             </div>
           ) : null}
