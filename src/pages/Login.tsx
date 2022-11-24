@@ -45,42 +45,6 @@ const Login: FC = (): ReactElement => {
 
   const navigate = useNavigate();
 
-  const notify404 = () =>
-    toast.error("Email not registered", {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
-  const notify401 = () =>
-    toast.error("Wrong Email or Password", {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
-  const notifySuccess = () =>
-    toast.success("Logged in", {
-      position: "bottom-left",
-      autoClose: 1000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
   type CreateLoginResponse = {
     token: string;
     userId: string;
@@ -232,3 +196,39 @@ const Login: FC = (): ReactElement => {
   );
 };
 export default Login;
+
+const notify404 = () =>
+  toast.error("Email not registered", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+
+const notify401 = () =>
+  toast.error("Wrong Email or Password", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+
+const notifySuccess = () =>
+  toast.success("Logged in", {
+    position: "bottom-left",
+    autoClose: 1000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
