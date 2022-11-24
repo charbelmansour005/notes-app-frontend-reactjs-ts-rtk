@@ -89,13 +89,16 @@ const Home: FC = (): ReactElement => {
             </IconButton>
           </Tooltip>
         </div>
+         {/** Open Modal For Add Notes */}
         <Backdrop
           sx={{ color: "#ffff", zIndex: (theme) => theme.zIndex.drawer + 3 }}
           open={open}
         >
           <IconButton onClick={handleClose}>
+               {/** Close Modal For Add Notes */}
             <CloseIcon sx={{ color: "white" }} />
           </IconButton>
+          {/** Add Notes */}
           <AddNotes />
         </Backdrop>
         <div>
