@@ -25,30 +25,6 @@ export default function NotesList() {
   const [updatedContent, setUpdatedContent] = useState<string | null>(null);
   const [modalActive, setModalActive] = useState<any>(false);
 
-  const notifySuccess = () =>
-    toast.success("Note Edited", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-
-  const notifyWarning = () =>
-    toast.warning("Note Deleted", {
-      position: "bottom-left",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-
   return (
     <ThemeProvider theme={lightTheme}>
       {note.notes.map((note, index) => (
@@ -165,3 +141,27 @@ export default function NotesList() {
     </ThemeProvider>
   );
 }
+
+const notifySuccess = () =>
+  toast.success("Note Edited", {
+    position: "bottom-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+
+const notifyWarning = () =>
+  toast.warning("Note Deleted", {
+    position: "bottom-left",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });

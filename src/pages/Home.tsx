@@ -103,7 +103,7 @@ const Home: FC = (): ReactElement => {
             <div className="center">
               <Alert severity="info">
                 <AlertTitle>Info</AlertTitle>
-                No Notes Found — <strong>start taking some!</strong>
+                No Notes Found — <strong>{note.error}</strong>
               </Alert>
             </div>
           ) : null}
