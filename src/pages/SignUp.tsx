@@ -46,17 +46,6 @@ const SignUp: FC = (): ReactElement => {
   const [theme, setTheme] = useState<any>(lightTheme);
   const [inputError, setInputError] = useState<boolean>(false);
   const navigate = useNavigate();
-  const notify = () =>
-    toast.success("Sign in to get started", {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
 
   type CreateResponse = {
     Success: string;
@@ -76,7 +65,7 @@ const SignUp: FC = (): ReactElement => {
       }
       setIsLoading(true);
       await axios.put<CreateResponse>(SignUpURL, payload);
-      notify();
+      notifySignedUp();
       navigate(`/login`);
     } catch (error) {
       if (error instanceof Error) {
@@ -223,3 +212,15 @@ const SignUp: FC = (): ReactElement => {
 };
 
 export default SignUp;
+
+const notifySignedUp = () =>
+  toast.success("Sign in to get started", {
+    position: "top-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
