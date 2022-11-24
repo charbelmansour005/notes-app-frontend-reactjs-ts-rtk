@@ -16,6 +16,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -105,11 +106,11 @@ const NavBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={() => navigate("/")}>Profile</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
-
+  //Mobile:
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -139,6 +140,9 @@ const NavBar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+      <MenuItem>
+        <Button>Search</Button>
+      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -146,6 +150,7 @@ const NavBar = () => {
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
+          onClick={() => navigate("/")}
         >
           <AccountCircle />
         </IconButton>
@@ -153,7 +158,7 @@ const NavBar = () => {
       </MenuItem>
     </Menu>
   );
-
+  //PC
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -175,7 +180,7 @@ const NavBar = () => {
           >
             MERN Notes
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -183,7 +188,7 @@ const NavBar = () => {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
@@ -206,6 +211,16 @@ const NavBar = () => {
             >
               <AccountCircle />
             </IconButton>
+            <MenuItem>
+              <Button
+                style={{ color: "white" }}
+                onClick={() => {
+                  navigate("/search");
+                }}
+              >
+                Search
+              </Button>
+            </MenuItem>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

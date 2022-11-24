@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
 import { fetchNotes } from "../features/note/noteSlice";
 import AddNotes from "../components/AddNotes";
 import Backdrop from "@mui/material/Backdrop";
-import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 import NavBar from "../components/NavBar";
@@ -15,6 +15,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Home: FC = (): ReactElement => {
   const note = useAppSelector((state) => state.note);
@@ -51,8 +52,6 @@ const Home: FC = (): ReactElement => {
     window.location.reload();
   };
 
-  const n = note.notes.length;
-
   return (
     <Fragment>
       <NavBar />
@@ -76,22 +75,14 @@ const Home: FC = (): ReactElement => {
           <IconButton onClick={handleClose}>
             <CloseIcon sx={{ color: "white" }} />
           </IconButton>
-
           <AddNotes />
         </Backdrop>
         <div>
           <div className="center">
             {note.loading && (
-              <Fragment>
-                {[...Array(n)].map(() => (
-                  <Skeleton
-                    className="margin__top"
-                    variant="rounded"
-                    width={450}
-                    height={150}
-                  />
-                ))}
-              </Fragment>
+              <Box sx={{ width: "100%" }}>
+                <LinearProgress />
+              </Box>
             )}
           </div>
           {note.error ? (
