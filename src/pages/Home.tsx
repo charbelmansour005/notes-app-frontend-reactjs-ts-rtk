@@ -71,6 +71,7 @@ const Home: FC = (): ReactElement => {
       <NavBar />
       <div>
         <div className="center">
+          
           {note.loading && (
             <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
               <LinearProgress />
@@ -80,16 +81,18 @@ const Home: FC = (): ReactElement => {
         <div className="center_btn">
           <Tooltip title="Add" arrow>
             <IconButton onClick={handleToggle}>
+              {/** Toggles Modal Open ( Hence AddNote Component ) */}
               <AddCircleIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Refresh" arrow>
             <IconButton onClick={handleRefresh}>
+              {/** Refresh Page ( No Socket.io yet ) */}
               <RefreshIcon />
             </IconButton>
           </Tooltip>
         </div>
-        {/** Open Modal For Add Notes */}
+        {/** MUI Backdrop Modal For Add Notes */}
         <Backdrop
           sx={{ color: "#ffff", zIndex: (theme) => theme.zIndex.drawer + 3 }}
           open={open}
