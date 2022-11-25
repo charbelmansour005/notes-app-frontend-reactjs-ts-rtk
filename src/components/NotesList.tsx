@@ -3,7 +3,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { ThemeProvider } from "@emotion/react";
-import { lightTheme } from "../assets/theme/theme";
 import { useAppSelector } from "../app/hooks/hooks";
 import { Chip, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,6 +15,7 @@ import { toast } from "react-toastify";
 import { Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import ClearIcon from "@mui/icons-material/Clear";
+import { lightTheme, darkTheme } from "../assets/theme/theme";
 
 type DeleteNoteResponse = "";
 
@@ -24,9 +24,10 @@ export default function NotesList() {
   const userId = localStorage.getItem("userId");
   const [updatedContent, setUpdatedContent] = useState<string | null>(null);
   const [modalActive, setModalActive] = useState<any>(false);
+  const theme = useAppSelector((state) => state.theme);
 
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
       {note.notes.map((note, index) => (
         <Box
           key={note._id}
@@ -46,8 +47,11 @@ export default function NotesList() {
             ) : (
               <>
                 <CardContent>
-                  <Typography variant="body2">
-                    <p style={{ wordWrap: "break-word" }}>{note.content}</p>
+                  <Typography
+                    variant="body2"
+                    style={{ wordWrap: "break-word" }}
+                  >
+                    {note.content}
                     <br />
                   </Typography>
                   <Typography
