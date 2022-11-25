@@ -18,9 +18,9 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import LinearProgress from "@mui/material/LinearProgress";
 import { lightTheme, darkTheme } from "../assets/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
-import { toggleTheme } from "../features/theme/themeSlice";
 
 const Home: FC = (): ReactElement => {
+
   // clearing the localStorage from the Token after 1 hour
   var hours: number = 1;
   var now: any = new Date().getTime();
@@ -73,31 +73,29 @@ const Home: FC = (): ReactElement => {
   return (
     <Fragment>
       <NavBar />
-      
-        <div>
-          <div className="center">
-            {note.loading && (
-              <Box
-                sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}
-              >
-                <LinearProgress />
-              </Box>
-            )}
-          </div>
-          <div className="center_btn">
-            <Tooltip title="Add" arrow>
-              <IconButton onClick={handleToggle}>
-                <AddCircleIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Refresh" arrow>
-              <IconButton onClick={handleRefresh}>
-                {/** Refresh Page ( No Socket.io yet ) */}
-                <RefreshIcon />
-              </IconButton>
-            </Tooltip>
-          </div>
-          <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+
+      <div>
+        <div className="center">
+          {note.loading && (
+            <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
+              <LinearProgress />
+            </Box>
+          )}
+        </div>
+        <div className="center_btn">
+          <Tooltip title="Add" arrow>
+            <IconButton onClick={handleToggle}>
+              <AddCircleIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Refresh" arrow>
+            <IconButton onClick={handleRefresh}>
+              {/** Refresh Page ( No Socket.io yet ) */}
+              <RefreshIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
+        <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
           <Backdrop
             sx={{ color: "#ffff", zIndex: (theme) => theme.zIndex.drawer + 3 }}
             open={open}
@@ -107,23 +105,23 @@ const Home: FC = (): ReactElement => {
             </IconButton>
             <AddNotes />
           </Backdrop>
-          </ThemeProvider>
-          <div>
-            {note.error ? (
-              <div className="center">
-                <Alert severity="info">
-                  <AlertTitle>Info</AlertTitle>
-                  No Notes Found — <strong>{note.error}</strong>
-                </Alert>
-              </div>
-            ) : null}
-            {!note.loading && note.notes.length ? (
-              <div className="center">
-                <NotesList />
-              </div>
-            ) : null}
-          </div>
+        </ThemeProvider>
+        <div>
+          {note.error ? (
+            <div className="center">
+              <Alert severity="info">
+                <AlertTitle>Info</AlertTitle>
+                No Notes Found — <strong>{note.error}</strong>
+              </Alert>
+            </div>
+          ) : null}
+          {!note.loading && note.notes.length ? (
+            <div className="center">
+              <NotesList />
+            </div>
+          ) : null}
         </div>
+      </div>
     </Fragment>
   );
 };

@@ -72,7 +72,7 @@ const NavBar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("Token");
+    localStorage.clear();
     navigate(`/login`);
   };
 

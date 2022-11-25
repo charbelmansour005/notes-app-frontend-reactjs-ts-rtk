@@ -19,6 +19,10 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
+import Confetti from "react-confetti";
+import useWindowSize from "../hooks/useWindowSize";
+import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
+import { toggleConfetti } from "../features/confetti/confettiSlice";
 
 const Copyright = (props: any) => {
   return (
@@ -42,8 +46,10 @@ const Login: FC = (): ReactElement => {
   const [password, setPassword] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
-
+  const { width, height } = useWindowSize();
+  const confetti = useAppSelector((state) => state.confetti);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   type CreateLoginResponse = {
     token: string;
@@ -63,6 +69,7 @@ const Login: FC = (): ReactElement => {
       let userId: string = response.data.userId;
       localStorage.setItem("Token", token);
       localStorage.setItem("userId", userId);
+      dispatch(toggleConfetti());
       notifySuccess();
       return navigate(`/`);
     } catch (error) {
@@ -191,6 +198,7 @@ const Login: FC = (): ReactElement => {
             </Box>
           </Box>
         </Grid>
+        {confetti.isActive && <Confetti width={width} height={height} />}
       </Grid>
     </ThemeProvider>
   );

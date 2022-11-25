@@ -21,6 +21,8 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
+import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
+import { toggleConfetti } from "../features/confetti/confettiSlice";
 
 function Copyright(props: any) {
   return (
@@ -45,6 +47,9 @@ const SignUp: FC = (): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
   const [inputError, setInputError] = useState<boolean>(false);
+  
+  const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
 
   type CreateResponse = {
@@ -66,6 +71,7 @@ const SignUp: FC = (): ReactElement => {
       setIsLoading(true);
       await axios.put<CreateResponse>(SignUpURL, payload);
       notifySignedUp();
+      dispatch(toggleConfetti());
       navigate(`/login`);
     } catch (error) {
       if (error instanceof Error) {
