@@ -47,7 +47,7 @@ export default function NotesList() {
               <>
                 <CardContent>
                   <Typography variant="body2">
-                    {note.content}
+                    <p style={{ wordWrap: "break-word" }}>{note.content}</p>
                     <br />
                   </Typography>
                   <Typography
