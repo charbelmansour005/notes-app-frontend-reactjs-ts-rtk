@@ -26,6 +26,9 @@ export default function NotesList() {
   const [modalActive, setModalActive] = useState<any>(false);
   const theme = useAppSelector((state) => state.theme);
 
+  const confetti = useAppSelector((state) => state.confetti);
+  console.log(confetti.isActive);
+
   return (
     <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
       {note.notes.map((note, index) => (
