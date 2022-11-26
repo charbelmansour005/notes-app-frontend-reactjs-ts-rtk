@@ -1,4 +1,4 @@
-import React, { useState, FC, ReactElement } from "react";
+import React, { useState, FC, ReactElement, useEffect } from "react";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -22,7 +22,10 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Confetti from "react-confetti";
 import useWindowSize from "../hooks/useWindowSize";
 import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
-import { toggleConfetti } from "../features/confetti/confettiSlice";
+import {
+  toggleConfettiOn,
+  toggleConfettiOff,
+} from "../features/confetti/confettiSlice";
 
 const Copyright = (props: any) => {
   return (
@@ -69,7 +72,7 @@ const Login: FC = (): ReactElement => {
       let userId: string = response.data.userId;
       localStorage.setItem("Token", token);
       localStorage.setItem("userId", userId);
-      dispatch(toggleConfetti());
+      dispatch(toggleConfettiOff());
       notifySuccess();
       return navigate(`/`);
     } catch (error) {
@@ -94,6 +97,12 @@ const Login: FC = (): ReactElement => {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(toggleConfettiOff());
+    }, 5000);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

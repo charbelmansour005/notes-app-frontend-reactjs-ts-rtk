@@ -12,12 +12,15 @@ export const confettiSlice = createSlice({
   name: "confetti",
   initialState: initialConfettiState,
   reducers: {
-    toggleConfetti: (state) => {
-      state.isActive = !state.isActive;
+    toggleConfettiOn: (state) => {
+      state.isActive = true;
+    },
+    toggleConfettiOff: (state) => {
+      state.isActive = false;
     },
   },
 });
 
-export const { toggleConfetti } = confettiSlice.actions;
+export const { toggleConfettiOn, toggleConfettiOff } = confettiSlice.actions;
 
 export default confettiSlice.reducer;
