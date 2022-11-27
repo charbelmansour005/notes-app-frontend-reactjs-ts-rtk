@@ -19,13 +19,13 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
-import Confetti from "react-confetti";
+// import Confetti from "react-confetti";
 import useWindowSize from "../hooks/useWindowSize";
 import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
-import {
-  toggleConfettiOn,
-  toggleConfettiOff,
-} from "../features/confetti/confettiSlice";
+// import {
+//   toggleConfettiOn,
+//   toggleConfettiOff,
+// } from "../features/confetti/confettiSlice";
 
 const Copyright = (props: any) => {
   return (
@@ -46,20 +46,20 @@ const Copyright = (props: any) => {
 
 const Login: FC = (): ReactElement => {
   const [email, setEmail] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
-  const { width, height } = useWindowSize();
+  // const { width, height } = useWindowSize();
   const confetti = useAppSelector((state) => state.confetti);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   type CreateLoginResponse = {
     token: string;
     userId: string;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload = {
       email: email,
@@ -67,12 +67,18 @@ const Login: FC = (): ReactElement => {
     };
     try {
       setIsLoading(true);
+      if (!email?.includes("@") || !password?.length) {
+        setIsLoading(false);
+        setEmail(``);
+        setPassword(``);
+        return notifyInputError();
+      }
       const response = await axios.post<CreateLoginResponse>(LoginURL, payload);
       let token: string = response.data.token;
       let userId: string = response.data.userId;
       localStorage.setItem("Token", token);
       localStorage.setItem("userId", userId);
-      dispatch(toggleConfettiOff());
+      // dispatch(toggleConfettiOff());
       notifySuccess();
       return navigate(`/`);
     } catch (error) {
@@ -98,11 +104,11 @@ const Login: FC = (): ReactElement => {
     setPassword(event.target.value);
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(toggleConfettiOff());
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     dispatch(toggleConfettiOff());
+  //   }, 5000);
+  // }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -114,7 +120,7 @@ const Login: FC = (): ReactElement => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: "url(https://i.ibb.co/5BRJVZk/84.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -124,7 +130,8 @@ const Login: FC = (): ReactElement => {
             backgroundPosition: "center",
           }}
         />
-
+        {/* https://random.imagecdn.app/500/150 */}
+        {/* https://source.unsplash.com/random */}
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <IconButton
             onClick={() => {
@@ -207,7 +214,7 @@ const Login: FC = (): ReactElement => {
             </Box>
           </Box>
         </Grid>
-        {confetti.isActive && <Confetti width={width} height={height} />}
+        {/* {confetti.isActive && <Confetti width={width} height={height} />} */}
       </Grid>
     </ThemeProvider>
   );
@@ -228,6 +235,17 @@ const notify404 = () =>
 
 const notify401 = () =>
   toast.error("Wrong Email or Password", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+const notifyInputError = () =>
+  toast.error("Incorrect format detected", {
     position: "bottom-left",
     autoClose: 5000,
     hideProgressBar: false,

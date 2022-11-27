@@ -20,7 +20,6 @@ import { lightTheme, darkTheme } from "../assets/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 
 const Home: FC = (): ReactElement => {
-
   // clearing the localStorage from the Token after 1 hour
   var hours: number = 1;
   var now: any = new Date().getTime();
@@ -109,10 +108,12 @@ const Home: FC = (): ReactElement => {
         <div>
           {note.error ? (
             <div className="center">
-              <Alert severity="info">
-                <AlertTitle>Info</AlertTitle>
-                No Notes Found — <strong>{note.error}</strong>
-              </Alert>
+              <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+                <Alert severity="info">
+                  <AlertTitle>Info</AlertTitle>
+                  No Notes Found — <strong>Start writing some</strong>
+                </Alert>
+              </ThemeProvider>
             </div>
           ) : null}
           {!note.loading && note.notes.length ? (

@@ -12,10 +12,13 @@ import { Chip } from "@mui/material";
 import "../assets/styles/SearchNotes.css";
 import Alert from "@mui/material/Alert";
 import SearchIcon from "@mui/icons-material/Search";
+import { lightTheme, darkTheme } from "../assets/theme/theme";
+import { ThemeProvider } from "@mui/material/styles";
 
 const SearchNotes: React.FC = () => {
   const [searchResults, setSearchResults] = useState<[] | any>([]);
   const note = useAppSelector((state) => state.note);
+  const theme = useAppSelector((state) => state.theme);
 
   const checkToken = () => {
     let token = localStorage.getItem("Token");
@@ -95,19 +98,27 @@ const SearchNotes: React.FC = () => {
       </Box>
       <>
         {!finalSearchRes.length ? (
-          <Box
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "1rem",
-              marginBottom: "1rem",
-            }}
-          >
-            <Alert severity="info">
-              <strong>search results will be displayed here</strong>
-            </Alert>
-          </Box>
+          <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+            <Box
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "1rem",
+                marginBottom: "1rem",
+              }}
+            >
+              {note.notes.length ? (
+                <Alert severity="info">
+                  <strong>search results will be displayed here</strong>
+                </Alert>
+              ) : (
+                <Alert severity="warning">
+                  <strong>you don't have any notes yet!</strong>
+                </Alert>
+              )}
+            </Box>
+          </ThemeProvider>
         ) : (
           finalSearchRes
         )}

@@ -32,8 +32,8 @@ export default function NotesList() {
         <Box
           key={note._id}
           sx={{
-            minWidth: "30rem",
-            maxWidth: "30rem",
+            minWidth: "70vw",
+            maxWidth: "70vw",
             marginTop: "10px",
             marginBottom: "10px",
             marginLeft: "10px",
@@ -60,7 +60,7 @@ export default function NotesList() {
                     gutterBottom
                   >
                     <br />
-                    Last Edited at {note.updated_At.split("T")[0]}
+                    Last edited at {note.updated_At.split("T")[0]}
                   </Typography>
                 </CardContent>
                 <CardActions>
