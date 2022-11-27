@@ -156,7 +156,7 @@ const SignUp: FC = (): ReactElement => {
                   name="email"
                   autoComplete="email"
                   onChange={handleEmailChange}
-                  value={Email}
+                  value={Email || ""}
                   helperText={
                     inputError
                       ? "Email must be real & Password at least 13 characters"
@@ -177,7 +177,7 @@ const SignUp: FC = (): ReactElement => {
                   id="password"
                   autoComplete="new-password"
                   onChange={handlePasswordChange}
-                  value={Password}
+                  value={Password || ""}
                   helperText={
                     inputError
                       ? "Email must be real & Password at least 13 characters"

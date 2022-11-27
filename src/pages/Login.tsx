@@ -178,7 +178,7 @@ const Login: FC = (): ReactElement => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={email}
+                value={email || ""}
               />
               <TextField
                 onChange={handlePasswordChange}
@@ -190,7 +190,7 @@ const Login: FC = (): ReactElement => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                value={password}
+                value={password || ""}
               />
               <Button
                 type="submit"

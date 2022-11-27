@@ -22,7 +22,7 @@ const SearchNotes: React.FC = () => {
 
   const checkToken = () => {
     let token = localStorage.getItem("Token");
-    console.log("token in storage" + token);
+    // console.log("token in storage" + token);
     if (token === undefined || token === null || token.length === 0) {
       window.location.href = "/login";
     } else {
