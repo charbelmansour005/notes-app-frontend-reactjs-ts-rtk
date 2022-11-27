@@ -5,16 +5,16 @@ import "../assets/styles/AddNotes.css";
 import axios from "axios";
 import { baseURL } from "../helper/app-helper";
 import { Typography } from "@mui/material";
-import useWindowSize from "../hooks/useWindowSize";
-import Confetti from "react-confetti";
+// import useWindowSize from "../hooks/useWindowSize";
+// import Confetti from "react-confetti";
 
 export interface IAddNotesProps {
   theme: any;
 }
 
 const AddNotes: FC = (): ReactElement => {
-  const { width, height } = useWindowSize();
-  const [confetti, setConfetti] = useState<boolean>(false);
+  // const { width, height } = useWindowSize();
+  // const [confetti, setConfetti] = useState<boolean>(false);
   const [content, setContent] = useState<string | null>(null);
   const [categoryName, setCategoryName] = useState<string | null>(null);
 
@@ -30,7 +30,7 @@ const AddNotes: FC = (): ReactElement => {
     };
     try {
       axios.post<CreateNote>(baseURL + `reactnote/${creator}`, payload);
-      setConfetti(true);
+      // setConfetti(true);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -39,7 +39,7 @@ const AddNotes: FC = (): ReactElement => {
 
   return (
     <Paper elevation={3}>
-      {confetti && <Confetti width={width} height={height} />}
+      {/* {confetti && <Confetti width={width} height={height} />} */}
       <div className="center_grid">
         <Typography
           sx={{ margin: "1rem", textAlign: "center", fontSize: 17 }}

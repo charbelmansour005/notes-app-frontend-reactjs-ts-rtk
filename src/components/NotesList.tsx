@@ -95,7 +95,7 @@ export default function NotesList() {
                     label="Note Content *"
                     multiline
                     rows={4}
-                    sx={{ width: "30rem" }}
+                    sx={{ width: "70vw" }}
                     fullWidth
                     variant="filled"
                     defaultValue={note.content}
