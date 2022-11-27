@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Home from "../pages/Home";
 import SearchNotes from "../pages/SearchNotes";
+// import { Router } from "react-router-dom";
 
 export interface IRoutesAsObjProps {}
 

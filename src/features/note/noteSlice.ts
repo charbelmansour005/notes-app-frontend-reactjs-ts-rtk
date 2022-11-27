@@ -1,8 +1,23 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { baseURL } from "../../helper/app-helper";
-import { Note } from "../../types/note.type";
-import { InitialNoteState } from "../../types/note.type";
+// import { Note } from "../../types";
+// import { InitialNoteState } from "../../types";
+
+type Note = {
+  _id: string;
+  content: string;
+  creator: string;
+  updated_At: string;
+  categoryName: string;
+  __v: number;
+};
+
+type InitialNoteState = {
+  loading: boolean;
+  notes: Note[];
+  error: string;
+};
 
 const initialNoteState: InitialNoteState = {
   loading: false,

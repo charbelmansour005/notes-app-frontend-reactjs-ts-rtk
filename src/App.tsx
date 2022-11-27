@@ -3,12 +3,15 @@ import "./App.css";
 import { RoutesAsObj } from "./routes/RoutesAsObj";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Routes } from "react-router-dom";
 
 const App: FC = (): ReactElement => {
   return (
     <Fragment>
-      <RoutesAsObj />
-      <ToastContainer />
+      <Routes>
+        <RoutesAsObj />
+        <ToastContainer />
+      </Routes>
     </Fragment>
   );
 };
