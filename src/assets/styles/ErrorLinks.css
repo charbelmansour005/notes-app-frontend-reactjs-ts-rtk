@@ -7,5 +7,13 @@
 }
 
 .link__style:hover {
-  color: darkorange;
+  color: rgb(0, 140, 255);
+}
+
+.link__style:active {
+  color: rgb(0, 102, 255);
+}
+
+.loader__container {
+  margin-top: 10px;
 }

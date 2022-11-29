@@ -1,5 +1,5 @@
 .centered {
-  background-color: #4b4d4f;
+  background-color: #31313f;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,9 +8,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-.error__container {
+.message__container {
   display: grid;
-  border: 1px solid rgb(193, 177, 177);
   padding: 5vw;
 }
 
@@ -20,4 +19,6 @@
 
 .title {
   font-size: 2rem;
+  font-weight: bold;
+  color: #31313f;
 }
