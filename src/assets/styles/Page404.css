@@ -1,5 +1,5 @@
 .centered {
-  background-color: #31313f;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,8 +9,20 @@
   color: white;
 }
 
-.body {
+.body_1 {
   font-size: 1.1rem;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.body_2 {
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.body_3 {
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .title {

@@ -7,17 +7,18 @@ const Page404: React.FC = () => {
   const colors = ["darkgreen", "black", "purple", "darkorange", "gray"];
   const randomColor = colors[Math.floor(Math.random() * 5)];
   const color = randomColor;
-  const fontWeights = ["bold", "normal", "lighter"];
-  const randomFontWeight = fontWeights[Math.floor(Math.random() * 3)];
-  const fontWeight = randomFontWeight;
+
+  const classNames = ["body_1", "body_2", "body_3"];
+  const randomClassName = classNames[Math.floor(Math.random() * 3)];
+  const activeClassName = randomClassName;
 
   return (
     <div className="centered">
-      <Paper sx={{ display: "grid", padding: "5vw" }}>
-        <h2 style={{ color: color, fontWeight: fontWeight }}>
+      <Paper variant="outlined" sx={{ display: "grid", padding: "5vw" }}>
+        <h2 style={{ color: color, textAlign: "center" }}>
           404 - Page Not Found
         </h2>
-        <p className="body">
+        <p className={activeClassName}>
           The page you are looking for might have been removed or temporarily
           unavailable.
         </p>
