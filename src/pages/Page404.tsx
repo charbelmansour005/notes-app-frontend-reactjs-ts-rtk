@@ -9,8 +9,8 @@ const Page404: React.FC = () => {
   const color = randomColor;
 
   const classNames = ["body_1", "body_2", "body_3"];
-  const randomClassName = classNames[Math.floor(Math.random() * 3)];
-  const activeClassName = randomClassName;
+  const randomClass = classNames[Math.floor(Math.random() * 3)];
+  const chosenClassName = randomClass;
 
   return (
     <div className="centered">
@@ -18,7 +18,7 @@ const Page404: React.FC = () => {
         <h2 style={{ color: color, textAlign: "center" }}>
           404 - Page Not Found
         </h2>
-        <p className={activeClassName}>
+        <p className={chosenClassName}>
           The page you are looking for might have been removed or temporarily
           unavailable.
         </p>
