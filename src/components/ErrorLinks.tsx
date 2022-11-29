@@ -20,9 +20,7 @@ const ErrorLinks: FC = () => {
 
   const handleSearchRedirect = () => {
     setIsLoading(true);
-    setTimeout(() => {
-      navigate("Search");
-    }, 500);
+    navigate("Search");
   };
 
   return (

@@ -13,7 +13,7 @@ const Page404: React.FC = () => {
 
   return (
     <div className="centered">
-      <Paper className="message__container">
+      <Paper sx={{ display: "grid", padding: "5vw" }}>
         <h2 style={{ color: color, fontWeight: fontWeight }}>
           404 - Page Not Found
         </h2>

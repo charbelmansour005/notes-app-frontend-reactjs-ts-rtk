@@ -8,10 +8,6 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-.message__container {
-  display: grid;
-  padding: 5vw;
-}
 
 .body {
   font-size: 1.1rem;
