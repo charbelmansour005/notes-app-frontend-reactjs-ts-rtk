@@ -1,0 +1,11 @@
+.link__style {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1.1rem;
+  margin-top: 1vh;
+  width: 200px;
+}
+
+.link__style:hover {
+  color: darkorange;
+}
