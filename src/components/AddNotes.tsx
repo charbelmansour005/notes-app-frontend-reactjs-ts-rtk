@@ -6,7 +6,6 @@ import axios from "axios";
 import { baseURL } from "../helper/app-helper";
 import { Typography } from "@mui/material";
 import { toast } from "react-toastify";
-import notifyWarning from "./NotesList";
 
 export interface IAddNotesProps {
   theme: any;
@@ -20,7 +19,7 @@ const AddNotes: FC = (): ReactElement => {
     Success: string;
   };
 
-  const handleCreateNote = () => {
+  const handleCreateNote = async () => {
     let creator = localStorage.getItem(`userId`);
     const payload = {
       content: content,
@@ -30,8 +29,7 @@ const AddNotes: FC = (): ReactElement => {
       if (content === `` || categoryName === ``) {
         return notifyWarning();
       }
-      axios.post<CreateNote>(baseURL + `reactnote/${creator}`, payload);
-
+      await axios.post<CreateNote>(baseURL + `reactnote/${creator}`, payload);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -84,3 +82,15 @@ const AddNotes: FC = (): ReactElement => {
 };
 
 export default AddNotes;
+
+const notifyWarning = () =>
+  toast.warning("Note empty", {
+    position: "bottom-left",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });

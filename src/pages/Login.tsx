@@ -246,7 +246,7 @@ const notifyInputError = () =>
 const notifySuccess = () =>
   toast.success("Logged in", {
     position: "bottom-left",
-    autoClose: 1000,
+    autoClose: false,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
