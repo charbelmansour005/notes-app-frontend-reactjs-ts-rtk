@@ -5,32 +5,33 @@ import "../assets/styles/AddNotes.css";
 import axios from "axios";
 import { baseURL } from "../helper/app-helper";
 import { Typography } from "@mui/material";
-// import useWindowSize from "../hooks/useWindowSize";
-// import Confetti from "react-confetti";
+import { toast } from "react-toastify";
+import { notifyWarning } from "./NotesList";
 
 export interface IAddNotesProps {
   theme: any;
 }
 
 const AddNotes: FC = (): ReactElement => {
-  // const { width, height } = useWindowSize();
-  // const [confetti, setConfetti] = useState<boolean>(false);
-  const [content, setContent] = useState<string | null>(null);
-  const [categoryName, setCategoryName] = useState<string | null>(null);
+  const [content, setContent] = useState<string>(``);
+  const [categoryName, setCategoryName] = useState<string>(``);
 
   type CreateNote = {
     Success: string;
   };
 
   const handleCreateNote = () => {
-    let creator = localStorage.getItem("userId");
+    let creator = localStorage.getItem(`userId`);
     const payload = {
       content: content,
       categoryName: categoryName,
     };
     try {
+      if (content === `` || categoryName === ``) {
+        return notifyWarning();
+      }
       axios.post<CreateNote>(baseURL + `reactnote/${creator}`, payload);
-      // setConfetti(true);
+
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -39,7 +40,6 @@ const AddNotes: FC = (): ReactElement => {
 
   return (
     <Paper elevation={3}>
-      {/* {confetti && <Confetti width={width} height={height} />} */}
       <div className="center_grid">
         <Typography
           sx={{ margin: "1rem", textAlign: "center", fontSize: 17 }}
