@@ -19,7 +19,6 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
 
 const Copyright = (props: any) => {
   return (
@@ -95,11 +94,11 @@ const Login: FC = (): ReactElement => {
   };
 
   const wallpapers = [
-    "url(https://i.ibb.co/jV7vMsP/485887.jpg)",
-    "url(https://i.ibb.co/5BRJVZk/84.jpg)",
+    "https://i.ibb.co/jV7vMsP/485887.jpg",
+    "https://i.ibb.co/5BRJVZk/84.jpg",
   ];
   const randomWallpaper = wallpapers[Math.floor(Math.random() * 2)];
-  const wallpaper = randomWallpaper;
+  const wallpaperURL = randomWallpaper;
 
   return (
     <ThemeProvider theme={theme}>
@@ -111,7 +110,7 @@ const Login: FC = (): ReactElement => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: wallpaper,
+            backgroundImage: `url(${wallpaperURL})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
