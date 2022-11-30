@@ -19,13 +19,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
-// import Confetti from "react-confetti";
-import useWindowSize from "../hooks/useWindowSize";
 import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
-// import {
-//   toggleConfettiOn,
-//   toggleConfettiOff,
-// } from "../features/confetti/confettiSlice";
 
 const Copyright = (props: any) => {
   return (
@@ -49,10 +43,7 @@ const Login: FC = (): ReactElement => {
   const [password, setPassword] = useState<string | null>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
-  // const { width, height } = useWindowSize();
-  const confetti = useAppSelector((state) => state.confetti);
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
 
   type CreateLoginResponse = {
     token: string;
@@ -78,7 +69,6 @@ const Login: FC = (): ReactElement => {
       let userId: string = response.data.userId;
       localStorage.setItem("Token", token);
       localStorage.setItem("userId", userId);
-      // dispatch(toggleConfettiOff());
       notifySuccess();
       return navigate(`/`);
     } catch (error) {
@@ -104,11 +94,12 @@ const Login: FC = (): ReactElement => {
     setPassword(event.target.value);
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     dispatch(toggleConfettiOff());
-  //   }, 5000);
-  // }, []);
+  const wallpapers = [
+    "url(https://i.ibb.co/jV7vMsP/485887.jpg)",
+    "url(https://i.ibb.co/5BRJVZk/84.jpg)",
+  ];
+  const randomWallpaper = wallpapers[Math.floor(Math.random() * 2)];
+  const wallpaper = randomWallpaper;
 
   return (
     <ThemeProvider theme={theme}>
@@ -120,7 +111,7 @@ const Login: FC = (): ReactElement => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://i.ibb.co/5BRJVZk/84.jpg)",
+            backgroundImage: wallpaper,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -130,8 +121,6 @@ const Login: FC = (): ReactElement => {
             backgroundPosition: "center",
           }}
         />
-        {/* https://random.imagecdn.app/500/150 */}
-        {/* https://source.unsplash.com/random */}
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <IconButton
             onClick={() => {
@@ -214,7 +203,6 @@ const Login: FC = (): ReactElement => {
             </Box>
           </Box>
         </Grid>
-        {/* {confetti.isActive && <Confetti width={width} height={height} />} */}
       </Grid>
     </ThemeProvider>
   );

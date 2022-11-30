@@ -22,10 +22,6 @@ import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
-import {
-  toggleConfettiOn,
-  toggleConfettiOff,
-} from "../features/confetti/confettiSlice";
 
 function Copyright(props: any) {
   return (
@@ -74,7 +70,6 @@ const SignUp: FC = (): ReactElement => {
       setIsLoading(true);
       await axios.put<CreateResponse>(SignUpURL, payload);
       notifySignedUp();
-      dispatch(toggleConfettiOn());
       navigate(`/login`);
     } catch (error) {
       if (error instanceof Error) {

@@ -6,7 +6,7 @@ import axios from "axios";
 import { baseURL } from "../helper/app-helper";
 import { Typography } from "@mui/material";
 import { toast } from "react-toastify";
-import { notifyWarning } from "./NotesList";
+import notifyWarning from "./NotesList";
 
 export interface IAddNotesProps {
   theme: any;
