@@ -21,7 +21,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
+import { useAppDispatch } from "../app/hooks/hooks";
 
 function Copyright(props: any) {
   return (
@@ -46,8 +46,6 @@ const SignUp: FC = (): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
   const [inputError, setInputError] = useState<boolean>(false);
-
-  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 

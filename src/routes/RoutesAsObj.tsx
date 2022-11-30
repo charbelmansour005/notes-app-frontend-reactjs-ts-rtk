@@ -5,11 +5,8 @@ import SignUp from "../pages/SignUp";
 import Home from "../pages/Home";
 import SearchNotes from "../pages/SearchNotes";
 import Page404 from "../pages/Page404";
-// import { Router } from "react-router-dom";
 
 export interface IRoutesAsObjProps {}
-
-// const Home = lazy(() => import("../components/Home"));
 
 export const RoutesAsObj: FC = (props: IRoutesAsObjProps): ReactElement => {
   let element = useRoutes([
