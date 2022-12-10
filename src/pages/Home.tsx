@@ -43,12 +43,10 @@ const Home: FC = (): ReactElement => {
   };
   const dispatch = useAppDispatch();
 
-  // done once
   useEffect(() => {
     dispatch(fetchNotes());
   }, [dispatch]);
 
-  // function for checking the local storage for the token on page load / reload
   const checkToken = () => {
     let token = localStorage.getItem("token");
     console.log("token in storage" + token);
@@ -68,7 +66,6 @@ const Home: FC = (): ReactElement => {
   return (
     <Fragment>
       <NavBar />
-
       <div>
         <div className="center">
           {note.loading && (
