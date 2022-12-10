@@ -1,7 +1,6 @@
 import React, { FC, useState, ReactElement } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -11,14 +10,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { ThemeProvider } from "@mui/material/styles";
 import { Link as NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { SignUpURL } from "../helper/app-helper";
-import { darkTheme, lightTheme } from "../assets/theme/theme";
-import IconButton from "@mui/material/IconButton";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import NightlightIcon from "@mui/icons-material/Nightlight";
 import { toast } from "react-toastify";
 import LinearProgress from "@mui/material/LinearProgress";
 
@@ -44,7 +37,6 @@ const SignUp: FC = (): ReactElement => {
   const [Password, setPassword] = useState<string>("");
   const [Name, setName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [theme, setTheme] = useState<any>(lightTheme);
   const [inputError, setInputError] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -105,22 +97,6 @@ const SignUp: FC = (): ReactElement => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <IconButton
-        onClick={() => {
-          setTheme(lightTheme);
-        }}
-      >
-        <WbSunnyIcon />
-      </IconButton>
-      <IconButton
-        onClick={() => {
-          setTheme(darkTheme);
-        }}
-      >
-        <NightlightIcon />
-      </IconButton>
-      <CssBaseline />
-
       <Box
         sx={{
           marginTop: 8,

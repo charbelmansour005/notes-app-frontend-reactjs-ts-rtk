@@ -17,7 +17,7 @@ import { useAppSelector, useAppDispatch } from "../app/hooks/hooks";
 import { lightTheme, darkTheme } from "../assets/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import { toggleTheme } from "../features/theme/themeSlice";
-import { FormGroup, FormControlLabel, Switch } from "@mui/material";
+import { FormControlLabel, Switch } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import NoteTwoToneIcon from "@mui/icons-material/NoteTwoTone";
 // Theme Switch

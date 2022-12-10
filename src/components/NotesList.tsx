@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import { ThemeProvider } from "@emotion/react";
 import { useAppSelector } from "../app/hooks/hooks";
 import { Chip, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -14,20 +13,16 @@ import { toast } from "react-toastify";
 import { Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import ClearIcon from "@mui/icons-material/Clear";
-import { lightTheme, darkTheme } from "../assets/theme/theme";
 
 type DeleteNoteResponse = "";
 
 export default function NotesList() {
   const note = useAppSelector((state) => state.note);
-  const userId = localStorage.getItem("userId");
   const [updatedContent, setUpdatedContent] = useState<string | null>(null);
   const [modalActive, setModalActive] = useState<any>(false);
-  const theme = useAppSelector((state) => state.theme);
 
   return (
-    // <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
-      <>
+    <>
       {note.notes.map((note, index) => (
         <Box
           key={note._id}
@@ -74,9 +69,7 @@ export default function NotesList() {
                   <IconButton
                     onClick={() => {
                       const id = note._id;
-                      axios.delete<DeleteNoteResponse>(
-                        `note/${id}`
-                      );
+                      axios.delete<DeleteNoteResponse>(`note/${id}`);
                       notifyWarning();
                       window.location.reload();
                     }}
@@ -142,7 +135,6 @@ export default function NotesList() {
           </Card>
         </Box>
       ))}
-    {/* </ThemeProvider> */}
     </>
   );
 }

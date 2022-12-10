@@ -12,17 +12,13 @@ import { Chip } from "@mui/material";
 import "../assets/styles/SearchNotes.css";
 import Alert from "@mui/material/Alert";
 import SearchIcon from "@mui/icons-material/Search";
-import { lightTheme, darkTheme } from "../assets/theme/theme";
-import { ThemeProvider } from "@mui/material/styles";
 
 const SearchNotes: React.FC = () => {
   const [searchResults, setSearchResults] = useState<[] | any>([]);
   const note = useAppSelector((state) => state.note);
-  const theme = useAppSelector((state) => state.theme);
 
   const checkToken = () => {
     let token = localStorage.getItem("token");
-    // console.log("token in storage" + token);
     if (token === undefined || token === null || token.length === 0) {
       window.location.href = "/login";
     } else {
