@@ -1,8 +1,5 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { baseURL } from "../../helper/app-helper";
-// import { Note } from "../../types";
-// import { InitialNoteState } from "../../types";
 
 type Note = {
   _id: string;
@@ -26,8 +23,7 @@ const initialNoteState: InitialNoteState = {
 };
 
 export const fetchNotes = createAsyncThunk("note/fetchNotes", async () => {
-  let userId = localStorage.getItem("userId");
-  const response = await axios.get(baseURL + `reactnotes/${userId}`);
+  const response = await axios.get(`notes`);
   return response.data.usernotes;
 });
 

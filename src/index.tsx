@@ -12,6 +12,28 @@ axios.defaults.baseURL = `http://localhost:3500/API/`;
 axios.defaults.headers.post["Content-Type"] = `application/json`;
 axios.defaults.headers.put["Content-Type"] = `application/json`;
 
+axios.interceptors.request.use(
+  (req) => {
+    // console.log(req);
+    req.headers["Authorization"] = `Bearer ${localStorage.getItem(
+      "token"
+    )}`;
+    return req;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

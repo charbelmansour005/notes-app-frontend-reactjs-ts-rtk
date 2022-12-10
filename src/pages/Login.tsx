@@ -63,11 +63,9 @@ const Login: FC = (): ReactElement => {
         setPassword(``);
         return notifyInputError();
       }
-      const response = await axios.post<CreateLoginResponse>(LoginURL, payload);
+      const response = await axios.post<CreateLoginResponse>(`login`, payload);
       let token: string = response.data.token;
-      let userId: string = response.data.userId;
-      localStorage.setItem("Token", token);
-      localStorage.setItem("userId", userId);
+      localStorage.setItem("token", token);
       notifySuccess();
       return navigate(`/`);
     } catch (error) {

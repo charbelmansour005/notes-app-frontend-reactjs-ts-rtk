@@ -51,7 +51,7 @@ const Home: FC = (): ReactElement => {
 
   // function for checking the local storage for the token on page load / reload
   const checkToken = () => {
-    let token = localStorage.getItem("Token");
+    let token = localStorage.getItem("token");
     console.log("token in storage" + token);
     if (token === undefined || token === null || token.length === 0) {
       window.location.href = "/login";
@@ -67,6 +67,7 @@ const Home: FC = (): ReactElement => {
   const handleRefresh = () => {
     window.location.reload();
   };
+
   const theme = useAppSelector((state) => state.theme);
 
   return (
