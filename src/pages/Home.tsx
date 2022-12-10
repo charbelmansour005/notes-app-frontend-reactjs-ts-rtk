@@ -14,7 +14,6 @@ import "../assets/styles/Home.css";
 import Tooltip from "@mui/material/Tooltip";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import RefreshIcon from "@mui/icons-material/Refresh";
 import LinearProgress from "@mui/material/LinearProgress";
 import { lightTheme, darkTheme } from "../assets/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
@@ -64,10 +63,6 @@ const Home: FC = (): ReactElement => {
     checkToken();
   }, []);
 
-  const handleRefresh = () => {
-    window.location.reload();
-  };
-
   const theme = useAppSelector((state) => state.theme);
 
   return (
@@ -88,14 +83,7 @@ const Home: FC = (): ReactElement => {
               <AddCircleIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Refresh" arrow>
-            <IconButton onClick={handleRefresh}>
-              {/** Refresh Page ( No Socket.io yet ) */}
-              <RefreshIcon />
-            </IconButton>
-          </Tooltip>
         </div>
-        {/* <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}> */}
         <Backdrop
           sx={{ color: "#ffff", zIndex: (theme) => theme.zIndex.drawer + 3 }}
           open={open}
