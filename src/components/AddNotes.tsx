@@ -3,7 +3,6 @@ import TextField from "@mui/material/TextField";
 import { Button, Paper } from "@mui/material";
 import "../assets/styles/AddNotes.css";
 import axios from "axios";
-import { baseURL } from "../helper/app-helper";
 import { Typography } from "@mui/material";
 import { toast } from "react-toastify";
 
@@ -29,7 +28,7 @@ const AddNotes: FC = (): ReactElement => {
       if (content === `` || categoryName === ``) {
         return notifyWarning();
       }
-      await axios.post<CreateNote>(baseURL + `reactnote/${creator}`, payload);
+      await axios.post<CreateNote>('note', payload);
       window.location.reload();
     } catch (error) {
       console.log(error);

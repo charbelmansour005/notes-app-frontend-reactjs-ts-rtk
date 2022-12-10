@@ -95,17 +95,17 @@ const Home: FC = (): ReactElement => {
             </IconButton>
           </Tooltip>
         </div>
-        <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
-          <Backdrop
-            sx={{ color: "#ffff", zIndex: (theme) => theme.zIndex.drawer + 3 }}
-            open={open}
-          >
-            <IconButton onClick={handleClose}>
-              <CloseIcon sx={{ color: "white" }} />
-            </IconButton>
-            <AddNotes />
-          </Backdrop>
-        </ThemeProvider>
+        {/* <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}> */}
+        <Backdrop
+          sx={{ color: "#ffff", zIndex: (theme) => theme.zIndex.drawer + 3 }}
+          open={open}
+        >
+          <IconButton onClick={handleClose}>
+            <CloseIcon sx={{ color: "white" }} />
+          </IconButton>
+          <AddNotes />
+        </Backdrop>
+        {/* </ThemeProvider> */}
         <div>
           {note.error ? (
             <div className="center">

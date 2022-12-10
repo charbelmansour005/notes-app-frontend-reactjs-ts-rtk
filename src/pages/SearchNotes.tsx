@@ -21,7 +21,7 @@ const SearchNotes: React.FC = () => {
   const theme = useAppSelector((state) => state.theme);
 
   const checkToken = () => {
-    let token = localStorage.getItem("Token");
+    let token = localStorage.getItem("token");
     // console.log("token in storage" + token);
     if (token === undefined || token === null || token.length === 0) {
       window.location.href = "/login";
@@ -98,7 +98,8 @@ const SearchNotes: React.FC = () => {
       </Box>
       <>
         {!finalSearchRes.length ? (
-          <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+          // <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+          <>
             <Box
               style={{
                 display: "flex",
@@ -118,7 +119,8 @@ const SearchNotes: React.FC = () => {
                 </Alert>
               )}
             </Box>
-          </ThemeProvider>
+            {/* </ThemeProvider> */}
+          </>
         ) : (
           finalSearchRes
         )}

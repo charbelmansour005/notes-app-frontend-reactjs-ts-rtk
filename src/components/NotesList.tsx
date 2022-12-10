@@ -8,7 +8,6 @@ import { Chip, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
-import { baseURL } from "../helper/app-helper";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { toast } from "react-toastify";
@@ -27,7 +26,8 @@ export default function NotesList() {
   const theme = useAppSelector((state) => state.theme);
 
   return (
-    <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+    // <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+      <>
       {note.notes.map((note, index) => (
         <Box
           key={note._id}
@@ -75,7 +75,7 @@ export default function NotesList() {
                     onClick={() => {
                       const id = note._id;
                       axios.delete<DeleteNoteResponse>(
-                        baseURL + `reactnote/${userId}/${id}`
+                        `note/${id}`
                       );
                       notifyWarning();
                       window.location.reload();
@@ -119,7 +119,7 @@ export default function NotesList() {
                         };
                         try {
                           const response = await axios.put(
-                            `${baseURL}/reactnote/${userId}/${id}`,
+                            `note/${id}`,
                             payload
                           );
                           console.log(response);
@@ -142,7 +142,8 @@ export default function NotesList() {
           </Card>
         </Box>
       ))}
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
+    </>
   );
 }
 
