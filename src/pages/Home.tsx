@@ -63,17 +63,17 @@ const Home: FC = (): ReactElement => {
 
   const theme = useAppSelector((state) => state.theme);
 
+  const showLoader = () => (
+    <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
+      <LinearProgress />
+    </Box>
+  );
+
   return (
     <Fragment>
       <NavBar />
       <div>
-        <div className="center">
-          {note.loading && (
-            <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
-              <LinearProgress />
-            </Box>
-          )}
-        </div>
+        <div className="center">{note.loading && showLoader()}</div>
         <div className="center_btn">
           <Tooltip title="Add" arrow>
             <IconButton onClick={handleToggle}>
@@ -90,7 +90,6 @@ const Home: FC = (): ReactElement => {
           </IconButton>
           <AddNotes />
         </Backdrop>
-        {/* </ThemeProvider> */}
         <div>
           {note.error ? (
             <div className="center">
