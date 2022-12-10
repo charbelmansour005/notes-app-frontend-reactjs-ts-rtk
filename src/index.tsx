@@ -6,6 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./app/store";
+import axios from "axios";
+
+axios.defaults.baseURL = `http://localhost:3500/API/`;
+axios.defaults.headers.post["Content-Type"] = `application/json`;
+axios.defaults.headers.put["Content-Type"] = `application/json`;
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

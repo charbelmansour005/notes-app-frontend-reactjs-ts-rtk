@@ -42,6 +42,7 @@ function Copyright(props: any) {
 const SignUp: FC = (): ReactElement => {
   const [Email, setEmail] = useState<string | null>(null);
   const [Password, setPassword] = useState<string>("");
+  const [Name, setName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<any>(lightTheme);
   const [inputError, setInputError] = useState<boolean>(false);
@@ -55,6 +56,7 @@ const SignUp: FC = (): ReactElement => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const payload = {
+      name: Name,
       email: Email,
       password: Password,
     };
@@ -65,7 +67,7 @@ const SignUp: FC = (): ReactElement => {
         return setInputError(true);
       }
       setIsLoading(true);
-      await axios.put<CreateResponse>(SignUpURL, payload);
+      await axios.put<CreateResponse>(`signup`, payload);
       notifySignedUp();
       navigate(`/login`);
     } catch (error) {
@@ -73,6 +75,7 @@ const SignUp: FC = (): ReactElement => {
         setIsLoading(false);
         setEmail("");
         setPassword("");
+        setName("");
         return toast.error(error.message, {
           position: "bottom-left",
           autoClose: 5000,
@@ -94,6 +97,10 @@ const SignUp: FC = (): ReactElement => {
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+  };
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
   };
 
   return (
@@ -141,6 +148,26 @@ const SignUp: FC = (): ReactElement => {
                   color={inputError ? "warning" : "primary"}
                   variant="standard"
                   required
+                  fullWidth
+                  name="name"
+                  focused
+                  label="Name"
+                  id="name"
+                  autoComplete="new-password"
+                  onChange={handleNameChange}
+                  value={Password || ""}
+                  helperText={
+                    inputError
+                      ? "Email must be real & Password at least 13 characters"
+                      : null
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  color={inputError ? "warning" : "primary"}
+                  variant="standard"
+                  required
                   focused
                   fullWidth
                   id="email"
@@ -177,6 +204,7 @@ const SignUp: FC = (): ReactElement => {
                   }
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
