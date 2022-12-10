@@ -15,8 +15,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import LinearProgress from "@mui/material/LinearProgress";
-import { lightTheme, darkTheme } from "../assets/theme/theme";
-import { ThemeProvider } from "@mui/material/styles";
 
 const Home: FC = (): ReactElement => {
   // clearing the localStorage from the Token after 1 hour
@@ -61,14 +59,6 @@ const Home: FC = (): ReactElement => {
     checkToken();
   }, []);
 
-  const theme = useAppSelector((state) => state.theme);
-
-  const showLoader = () => (
-    <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
-      <LinearProgress />
-    </Box>
-  );
-
   return (
     <Fragment>
       <NavBar />
@@ -92,14 +82,7 @@ const Home: FC = (): ReactElement => {
         </Backdrop>
         <div>
           {note.error ? (
-            <div className="center">
-              <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
-                <Alert severity="info">
-                  <AlertTitle>Info</AlertTitle>
-                  No Notes Found — <strong>Start writing some</strong>
-                </Alert>
-              </ThemeProvider>
-            </div>
+            <div className="center">{showNoteNotFound()}</div>
           ) : null}
           {!note.loading && note.notes.length ? (
             <div className="center">
@@ -111,5 +94,18 @@ const Home: FC = (): ReactElement => {
     </Fragment>
   );
 };
+
+const showLoader = () => (
+  <Box sx={{ width: "100%", marginBottom: "5px", marginTop: "5px" }}>
+    <LinearProgress />
+  </Box>
+);
+
+const showNoteNotFound = () => (
+  <Alert severity="info">
+    <AlertTitle>Info</AlertTitle>
+    No Notes Found — <strong>Start writing some</strong>
+  </Alert>
+);
 
 export default Home;
